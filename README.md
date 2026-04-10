@@ -74,3 +74,7 @@ URL: http://localhost:4200
 ```
 ⚡ Angular CLI 20 + TypeScript + Standalone + Signals + Server-Side Rendering (SSR) + SCSS & Bootstrap 5
 ```
+
+---
+
+**Developed by Nattawat Thanwiset (Ohm)**
