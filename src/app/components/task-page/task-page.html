@@ -1,1 +1,87 @@
-<p>task-page works!</p>
+<div class="container py-5">
+  <div class="page-header d-flex align-items-end justify-content-between">
+    <div>
+      <h2 class="m-0"><i class="fa-solid fa-rocket me-2"></i>Your Workspace</h2>
+      <p class="text-muted mt-2 mb-0 ms-1">Manage your productivity and daily goals.</p>
+    </div>
+    <div
+      class="badge rounded-pill px-4 py-2 shadow-sm bg-white"
+      style="color: #0984e3; border: 1px solid rgba(9, 132, 227, 0.2)"
+    >
+      <span class="fw-bold">{{ totalElements }}</span> Tasks Active
+    </div>
+  </div>
+
+  <div class="controls-bar d-flex justify-content-between align-items-end shadow-sm">
+    <div class="min-width-button-area">
+      @if (taskTable.selectedIds().length > 0) {
+        <button class="btn btn-delete-multi shadow-sm" (click)="deleteSelected()">
+          <i class="fa-solid fa-trash-can me-2"></i>Delete ({{ taskTable.selectedIds().length }})
+        </button>
+      }
+    </div>
+
+    <div class="d-flex align-items-end gap-3">
+      <div class="filter-group">
+        <label>Filter Priority</label>
+        <select
+          class="form-select form-select-sm shadow-sm"
+          style="width: 160px"
+          [(ngModel)]="pagePriorityFilter"
+          (ngModelChange)="onPriorityFilterChange($event)"
+        >
+          <option [ngValue]="null">All Priority</option>
+          <option value="HIGH">🔴 High Priority</option>
+          <option value="MEDIUM">🟡 Medium</option>
+          <option value="LOW">🔵 Low</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Page Size</label>
+        <select
+          class="form-select form-select-sm shadow-sm"
+          style="width: 115px"
+          [ngModel]="pageSize"
+          (ngModelChange)="onPageSizeChange($event)"
+        >
+          @for (size of pageSizeList; track size) {
+            <option [value]="size">{{ size }} Items</option>
+          }
+        </select>
+      </div>
+
+      <button
+        class="btn btn-add-main shadow-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#taskmodal"
+        (click)="openAddModal()"
+      >
+        <i class="fa-solid fa-plus-circle me-2"></i>Create Task
+      </button>
+    </div>
+  </div>
+
+  <div class="task-table-wrapper">
+    <app-task-table
+      #taskTable
+      [tasks]="tasks()"
+      [pageCurrent]="pageCurrent"
+      [pageSize]="pageSize"
+      [pageTotal]="totalElements"
+      (refresh)="onRefreshAfterDelete()"
+      (edit)="openEditModal($event)"
+      (sortChange)="onSortChange($event)"
+    />
+  </div>
+
+  <div class="mt-5 d-flex justify-content-center">
+    <app-pagination-common
+      [totalPages]="pageTotal"
+      [pageCurrent]="pageCurrent"
+      (changePage)="onPageChange($event)"
+    />
+  </div>
+</div>
+
+<app-task-modal [mode]="modalMode" [editData]="selectedTask" (saved)="onTaskSaved()" />

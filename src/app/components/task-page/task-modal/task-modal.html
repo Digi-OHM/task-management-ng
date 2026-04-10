@@ -1,0 +1,100 @@
+<div class="modal fade" id="taskmodal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header border-bottom-0 pb-0 px-4 pt-4">
+        <h5 class="modal-title d-flex align-items-center">
+          <div
+            class="icon-box me-3 d-flex align-items-center justify-content-center rounded-circle shadow-sm"
+            [ngClass]="mode === 'ADD' ? 'bg-primary text-white' : 'bg-warning text-dark'"
+            style="width: 42px; height: 42px"
+          >
+            <i class="fa-solid" [ngClass]="mode === 'ADD' ? 'fa-plus' : 'fa-pen-to-square'"></i>
+          </div>
+          <span class="fw-bold text-dark" style="font-size: 1.25rem">
+            {{ mode === 'ADD' ? 'Create New Task' : 'Edit Task Details' }}
+          </span>
+        </h5>
+        <button
+          type="button"
+          id="closeTaskModal"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="resetForm()"
+        ></button>
+      </div>
+
+      <div class="modal-body py-4 px-4">
+        <form [formGroup]="taskForm">
+          <input type="hidden" formControlName="id" />
+
+          <div class="mb-4">
+            <label class="form-label fw-bold small text-uppercase text-muted">Task Title</label>
+            <input
+              type="text"
+              class="form-control form-control-lg border-2"
+              formControlName="title"
+              placeholder="e.g. Design System Update"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-bold small text-uppercase text-muted">Description</label>
+            <textarea
+              class="form-control border-2"
+              formControlName="description"
+              rows="3"
+              placeholder="Briefly describe the objective..."
+            ></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold small text-uppercase text-muted"
+                >Priority Level</label
+              >
+              <select class="form-select border-2" formControlName="priority">
+                <option value="LOW">Low Priority</option>
+                <option value="MEDIUM">Medium Priority</option>
+                <option value="HIGH">High Priority</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold small text-uppercase text-muted">Due Date</label>
+              <input type="date" class="form-control border-2" formControlName="dueDate" />
+            </div>
+          </div>
+        </form>
+
+        <div
+          *ngIf="saveError()"
+          class="alert alert-danger d-flex align-items-center mt-3 border-0 shadow-sm"
+        >
+          <i class="fa-solid fa-triangle-exclamation me-2"></i>
+          <span>{{ saveError() }}</span>
+        </div>
+      </div>
+
+      <div class="modal-footer border-top-0 d-flex justify-content-end pb-4 px-4">
+        <button
+          type="button"
+          class="btn btn-link text-muted text-decoration-none me-2 fw-semibold"
+          data-bs-dismiss="modal"
+          (click)="resetForm()"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-5 fw-bold shadow-sm"
+          [disabled]="taskForm.invalid || isSubmitting()"
+          (click)="onSave()"
+        >
+          <span *ngIf="isSubmitting()" class="spinner-border spinner-border-sm me-2"></span>
+          {{ mode === 'ADD' ? 'Create Task' : 'Save Changes' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

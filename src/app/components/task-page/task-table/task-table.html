@@ -1,0 +1,112 @@
+<div class="table-responsive shadow-sm">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th style="width: 50px" class="text-center">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            (change)="toggleAll($event)"
+            [checked]="isAllSelected()"
+          />
+        </th>
+        <th style="width: 70px" class="text-center">No.</th>
+        <th style="width: 40%">Task Details</th>
+        <th style="width: 140px" class="text-center">Due Date</th>
+        <th style="width: 130px" class="text-center">Priority</th>
+        <th style="width: 110px" class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (task of tasks(); track task.id; let i = $index) {
+        <tr
+          (click)="toggleExpand(task.id!)"
+          class="main-row"
+          [class.is-expanded]="expandedId() === task.id"
+        >
+          <td class="text-center" (click)="$event.stopPropagation()">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="selectedIds().includes(task.id!)"
+              (change)="toggleSelection(task.id!)"
+            />
+          </td>
+          <td class="text-center text-muted small tabular-nums">
+            {{ (pageCurrent() - 1) * pageSize() + (i + 1) }}
+          </td>
+
+          <td class="task-info-cell">
+            <div class="task-title" [title]="task.title">{{ task.title }}</div>
+            <div class="task-desc">{{ task.description || 'No description provided' }}</div>
+          </td>
+
+          <td class="text-center">
+            <span class="text-muted small">
+              <i class="fa-regular fa-calendar-check me-1"></i>
+              {{ formatDate(task.dueDate) }}
+            </span>
+          </td>
+
+          <td class="text-center" (click)="$event.stopPropagation()">
+            <div class="d-flex justify-content-center">
+              <select
+                class="form-select form-select-sm fw-bold"
+                [ngClass]="{
+                  'bg-danger text-white border-danger': task.priority === 'HIGH',
+                  'bg-warning text-dark border-warning': task.priority === 'MEDIUM',
+                  'bg-info text-white border-info': task.priority === 'LOW',
+                }"
+                [value]="task.priority"
+                (change)="onChangePriority(task.id!, $any($event.target).value)"
+                style="width: 100px; cursor: pointer"
+              >
+                <option value="HIGH">HIGH</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LOW">LOW</option>
+              </select>
+            </div>
+          </td>
+
+          <td class="text-center action-cell" (click)="$event.stopPropagation()">
+            <div class="d-flex justify-content-center gap-1">
+              <button
+                class="btn btn-sm btn-outline-primary shadow-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#taskmodal"
+                (click)="edit.emit(task)"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger shadow-sm" (click)="onDelete(task.id)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        @if (expandedId() === task.id) {
+          <tr class="expanded-detail-row">
+            <td colspan="6">
+              <div class="detail-container">
+                <div class="detail-label">Description Detail</div>
+                <div class="detail-content">
+                  {{ task.description || 'No additional details available for this task.' }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        }
+      } @empty {
+        <tr>
+          <td colspan="6" class="text-center py-5">
+            <div class="text-muted opacity-50">
+              <i class="fa-solid fa-clipboard-list fa-3x mb-3"></i>
+              <p>No tasks found.</p>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

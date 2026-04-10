@@ -1,0 +1,113 @@
+$primary-color: #0984e3;
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// แอนิเมชันตอน Modal ปรากฏ
+.modal.fade .modal-dialog {
+  transform: translateY(20px);
+  transition: $transition-smooth;
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0);
+}
+
+.modal-content {
+  border-radius: 20px;
+  overflow: hidden;
+
+  .modal-header {
+    padding: 1.5rem 1.5rem 0.5rem;
+
+    .icon-box {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &:hover .icon-box {
+    transform: rotate(15deg) scale(1.1);
+  }
+}
+
+// ปรับแต่ง Form Controls ให้เข้ากับ Theme
+.form-label {
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-control,
+.form-select {
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  border-color: #e1e1e1;
+  transition: $transition-smooth;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 4px rgba(9, 132, 227, 0.1);
+    transform: translateY(-1px);
+  }
+
+  &.form-control-lg {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+// ปุ่มกด
+.btn-primary {
+  background-color: $primary-color;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 30px;
+  transition: $transition-smooth;
+
+  &:hover:not(:disabled) {
+    background-color: darken($primary-color, 5%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(9, 132, 227, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-link {
+  transition: $transition-smooth;
+  &:hover {
+    color: #2d3436 !important;
+    transform: scale(1.05);
+  }
+}
+
+// Alert แอนิเมชัน
+.alert {
+  border-radius: 12px;
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

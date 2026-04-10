@@ -1,0 +1,167 @@
+@use 'sass:color';
+
+$primary-color: #0984e3;
+$secondary-bg: linear-gradient(135deg, #f0f7ff 0%, #c1e0ff 100%);
+$accent-gradient: linear-gradient(135deg, $primary-color 0%, #076ad1 100%);
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: $secondary-bg;
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 1200px;
+  animation: fadeInPage 0.8s ease-out;
+}
+
+// Header
+.page-header {
+  margin-bottom: 2rem;
+
+  h2 {
+    font-weight: 900;
+    color: #2d3436;
+    letter-spacing: -1px;
+
+    i {
+      background: $accent-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+
+// Controls Bar (Glassmorphism)
+.controls-bar {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.min-width-button-area {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+// Filter Groups
+.filter-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: 800;
+    color: $primary-color;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .form-select-sm {
+    height: 40px; // Lock height to match button
+    border-radius: 10px;
+    border: 1px solid rgba($primary-color, 0.1);
+    background-color: white;
+    font-weight: 600;
+    color: #444;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: $transition-smooth;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 4px rgba($primary-color, 0.1);
+    }
+  }
+}
+
+// Button Delete Selected
+.btn-delete-multi {
+  height: 40px;
+  background: white;
+  color: #d63031;
+  border: 2px solid #ff7675;
+  border-radius: 10px;
+  padding: 0 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  transition: $transition-smooth;
+  animation: slideInLeft 0.3s ease-out;
+
+  &:hover {
+    background: #d63031;
+    color: white;
+    border-color: #d63031;
+    transform: translateY(-2px);
+  }
+}
+
+// Button Create Task (Lock Height 40px)
+.btn-add-main {
+  height: 40px; // Match Select Height
+  background: $accent-gradient;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition-smooth;
+  box-shadow: 0 8px 15px rgba($primary-color, 0.2);
+
+  i {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 25px rgba($primary-color, 0.3);
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Wrapper for Table
+.task-table-wrapper {
+  background: white;
+  border-radius: 24px;
+  padding: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

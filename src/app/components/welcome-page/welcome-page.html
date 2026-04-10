@@ -1,7 +1,31 @@
-<p class="p-3 bg-danger" (click)="onClick()">welcome-page works!</p>
+<div class="welcome-container">
+  <div class="left-section">
+    <div class="circle-decoration"></div>
+    <div class="content-wrapper">
+      <div class="brand-tag mb-3">Professional Tool</div>
+      <h1 class="welcome-title"><span class="highlight">Task</span> Management<br />System</h1>
+      <div class="divider"></div>
+      <p class="welcome-subtitle">
+        Organize your thoughts, achieve every goal.<br />
+        Simple, powerful, and fast.
+      </p>
+    </div>
+  </div>
 
-<button class="btn btn-primary"><i class="fa-solid fa-list-check me-2"></i> จัดการงาน</button>
+  <div class="right-section">
+    <div class="content-wrapper text-center">
+      <div class="icon-floating mb-4">
+        <i class="fa-solid fa-rocket"></i>
+      </div>
+      <h2 class="action-title mb-2">Ready to start?</h2>
+      <p class="action-text mb-5">Start managing your tasks efficiently.</p>
 
-<div class="p-3 bg-info">
-  <i class="fa-solid fa-envelope"></i>
+      <button class="custom-btn" routerLink="/task">
+        <span>Get Started</span>
+        <i class="fa-solid fa-arrow-right-long"></i>
+      </button>
+
+      <div class="footer-text mt-5">Version 1.0.0 • 2026 Edition</div>
+    </div>
+  </div>
 </div>

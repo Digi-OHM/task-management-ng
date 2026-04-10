@@ -1,18 +1,14 @@
-import { Component } from '@angular/core';
-import Swal from 'sweetalert2';
-
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-welcome-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './welcome-page.html',
   styleUrl: './welcome-page.scss',
 })
 export class WelcomePage {
-  onClick() {
-    Swal.fire({
-      title: 'Drag me!',
-      icon: 'success',
-      draggable: true,
-    });
-  }
+  // private router = inject(Router);
+  // onClick() {
+  //   this.router.navigate(['/task']);
+  // }
 }

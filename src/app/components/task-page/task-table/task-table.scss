@@ -1,0 +1,150 @@
+$primary-color: #0984e3;
+
+.table-responsive {
+  border-radius: 12px;
+  border: 1px solid #e1e4e8;
+  background: #ffffff;
+}
+
+.table {
+  margin-bottom: 0;
+  border-collapse: collapse;
+  table-layout: fixed; // ล็อคความกว้างคอลัมน์ไม่ให้ดีดไปมา
+  width: 100%;
+
+  thead tr th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e1e4e8;
+    color: #636e72;
+    font-size: 0.85rem;
+    padding: 1rem;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  tbody tr td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f2f6;
+  }
+}
+
+// แถวหลักและการ Hover
+.main-row {
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: #fcfcfc;
+  }
+
+  &.is-expanded {
+    background-color: rgba($primary-color, 0.04);
+    td {
+      border-bottom: none; // เชื่อมแถวบนกับแถวรายละเอียด
+    }
+  }
+}
+
+// จัดการข้อความ Title และ Desc ในหน้าตารางหลัก
+.task-info-cell {
+  overflow: hidden;
+
+  .task-title {
+    font-weight: 700;
+    color: #2d3436;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .task-desc {
+    color: #b2bec3;
+    font-size: 0.8rem;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+}
+
+// ส่วนที่กางออก (Expanded Row)
+.expanded-detail-row {
+  background-color: rgba($primary-color, 0.04);
+
+  td {
+    padding: 0 1rem 1.5rem 1rem;
+    border-top: none;
+  }
+
+  .detail-container {
+    padding: 1.25rem;
+    background: #ffffff;
+    border-radius: 8px;
+    border-left: 4px solid $primary-color;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    animation: slideIn 0.25s ease-out;
+  }
+
+  .detail-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .detail-content {
+    font-size: 0.9rem;
+    color: #2d3436;
+    line-height: 1.6;
+    white-space: pre-wrap; // รองรับการเคาะขึ้นบรรทัดใหม่
+    word-break: break-word;
+  }
+}
+
+// ตกแต่ง Select และ Buttons
+.form-select-sm {
+  height: 32px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  padding: 0 0.5rem;
+  border: 1px solid transparent;
+}
+
+.action-cell {
+  white-space: nowrap;
+}
+
+.btn-sm {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+// Animations
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 992px) {
+  .table {
+    table-layout: auto;
+    min-width: 800px;
+  }
+}

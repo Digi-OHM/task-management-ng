@@ -1,0 +1,9 @@
+:host ::ng-deep {
+  .ngx-spinner-overlay {
+    pointer-events: auto;
+
+    &.fade-out {
+      display: none !important;
+    }
+  }
+}
