@@ -22,7 +22,7 @@ Angular: 20.3.18
 ... platform-browser, platform-server, router
 
 Package                         Version
----------------------------------------------------------
+----------------------------------------------------------
 @angular-devkit/architect       0.2003.23
 @angular-devkit/core            20.3.23
 @angular-devkit/schematics      20.3.23
