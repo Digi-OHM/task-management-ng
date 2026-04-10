@@ -1,3 +1,5 @@
+@use 'sass:color'; // 1. ซ่อมจุดที่ 1: เพิ่ม Module สำหรับจัดการสี
+
 $primary-color: #0984e3;
 $transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -63,7 +65,8 @@ $transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transition: $transition-smooth;
 
   &:hover:not(:disabled) {
-    background-color: darken($primary-color, 5%);
+    // 2. ซ่อมจุดที่ 2: เปลี่ยนจาก darken เป็น color.adjust
+    background-color: color.adjust($primary-color, $lightness: -5%);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(9, 132, 227, 0.3);
   }
